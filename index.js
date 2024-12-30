@@ -108,7 +108,8 @@ function createBot() {
         port: config.port,
         username: config.username,
         auth: 'microsoft',
-        physicsEnabled: false
+        physicsEnabled: false,
+        viewDistance: 2
     });
 
     if (config.modded) forge.autoVersionForge(bot._client);
