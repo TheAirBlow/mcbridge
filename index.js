@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, SlashCommandBuilder, ActivityType } from 'discord.js';
+import { Client, GatewayIntentBits, SlashCommandBuilder, ActivityType, cleanContent } from 'discord.js';
 import config from './config.json' with { type: "json" };
 import forge from 'minecraft-protocol-forge';
 import { format } from "mc-chat-format";
@@ -49,7 +49,10 @@ discordClient.once('ready', async () => {
 
 discordClient.on('messageCreate', async message => {
     if (message.channel.id === config.channel && !message.author.bot) {
-        bot?.chat(`/me <${message.author.username}> ${message.content}`);
+        let cleaned = cleanContent(message.content, message.channel).replace(/<a?:([a-zA-Z0-9_]+):\d+>/g, ':$1:');
+        let attachments = message.attachments.map(attachment => `[${attachment.name}]`).join(' ');
+        if (attachments) cleaned += ` ${attachments}`;
+        bot?.chat(`/say <${message.author.username}> ${cleaned}`);
     }
 });
 
