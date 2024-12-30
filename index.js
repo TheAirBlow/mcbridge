@@ -82,7 +82,7 @@ discordClient.on('interactionCreate', async (interaction) => {
         } else {
             await interaction.reply('The bot is currently not connected to the server.');
         }
-    } else if (commandName === 'terminate') {
+    } else if (commandName === 'terminator') {
         if (bot) {
             killaura = interaction.options.getBool('enabled');
             await interaction.reply(killaura
