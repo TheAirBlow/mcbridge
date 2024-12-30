@@ -1,7 +1,6 @@
 import { Client, GatewayIntentBits, SlashCommandBuilder, ActivityType, cleanContent } from 'discord.js';
 import config from './config.json' with { type: "json" };
 import forge from 'minecraft-protocol-forge';
-import { setTimeout } from "timers/promises";
 import { format } from "mc-chat-format";
 import mc from "minecraftstatuspinger";
 import mineflayer from 'mineflayer';
