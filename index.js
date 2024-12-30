@@ -126,7 +126,8 @@ function createBot() {
     });
 
     bot.on('kicked', (reason) => {
-        channel?.send(`<:TrollShrug:1256731287310569563> Bot got kicked: \`${reason}\``);
+        reason = reason.startsWith("{") ? format(JSON.parse(reason)) : reason;
+        channel?.send(`<:TrollShrug:1256731287310569563> Bot got kicked: ${reason}`);
         console.error(`Bot was kicked: ${reason}`);
         reconnect();
     });
