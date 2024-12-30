@@ -108,7 +108,7 @@ function createBot() {
         physicsEnabled: false
     });
 
-    if (modded) forge.autoVersionForge(bot._client);
+    if (config.modded) forge.autoVersionForge(bot._client);
 
     bot.on('playerJoined', (player) => {
         players.push(player.username);
