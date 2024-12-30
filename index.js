@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits, SlashCommandBuilder, ActivityType, cleanContent } from 'discord.js';
 import config from './config.json' with { type: "json" };
 import forge from 'minecraft-protocol-forge';
+import { setTimeout } from "timers/promises";
 import { format } from "mc-chat-format";
 import mc from "minecraftstatuspinger";
 import mineflayer from 'mineflayer';
@@ -133,13 +134,12 @@ function createBot() {
         reason = reason.startsWith("{") ? format(JSON.parse(reason)) : reason;
         channel?.send(`<:TrollShrug:1256731287310569563> Bot got kicked: ${reason}`);
         console.error(`Bot was kicked: ${reason}`);
-        reconnect();
     });
 
     bot.on('end', () => {
         channel?.send(`<:awooga:1138432126820286496> The bot got disconnected`);
         bot = spawned = players = undefined;
-        reconnect();
+        setTimeout(reconnect, 60000);
     });
 
     bot.on('whisper', (username, message) => {
